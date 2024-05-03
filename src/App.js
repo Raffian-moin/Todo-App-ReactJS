@@ -1,10 +1,10 @@
-import './App.css';
-import Hello from './Todo'
+import "./App.css";
+import Todo from "./Todo/Todo";
 
 function App() {
   return (
     <div className="App">
-      <Hello />
+      <Todo />
     </div>
   );
 }
