@@ -1,6 +1,6 @@
 import Item from "./Item";
 
-export default function ItemList({ items, setItems, setTodoInput }) {
+export default function ItemList({ items, setItems, setTodoInput, setEditingItemId }) {
   return (
     <ul className="list-group mb-0">
       {items.map((item, index) => (
@@ -10,6 +10,7 @@ export default function ItemList({ items, setItems, setTodoInput }) {
           setItems={setItems}
           key={index}
           setTodoInput={setTodoInput}
+          setEditingItemId={setEditingItemId}
         />
       ))}
     </ul>

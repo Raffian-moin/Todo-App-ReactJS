@@ -1,4 +1,4 @@
-export default function Items({ item, items, setItems, setTodoInput }) {
+export default function Items({ item, items, setItems, setTodoInput, setEditingItemId }) {
   const handleRemoveItem = (e) => {
     e.preventDefault();
     setItems(items.filter((currentItem) => currentItem.id !== item.id));
@@ -21,7 +21,8 @@ export default function Items({ item, items, setItems, setTodoInput }) {
 
   const handleEditItem = (e) => {
     e.preventDefault();
-    setTodoInput(item.todo)
+    setTodoInput(item.todo);
+    setEditingItemId(item.id)
   };
 
   return (
@@ -42,7 +43,8 @@ export default function Items({ item, items, setItems, setTodoInput }) {
             <p>{item.todo}</p>
           )}
         </div>
-        <a
+        {item.status === "pending" &&
+          <a
           href="#"
           data-mdb-tooltip-init=""
           title="Remove item"
@@ -50,6 +52,8 @@ export default function Items({ item, items, setItems, setTodoInput }) {
         >
           Edit
         </a>
+        }
+
         <a
           href="#"
           data-mdb-tooltip-init=""

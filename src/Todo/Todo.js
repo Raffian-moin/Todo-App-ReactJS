@@ -17,6 +17,7 @@ export default function Todo() {
 
   const [items, setItems] = useState(initialItems);
   const [todoInput, setTodoInput] = useState("");
+  const [editingItemId, setEditingItemId] = useState("");
 
   const handleAddItem = (e) => {
     e.preventDefault();
@@ -24,10 +25,30 @@ export default function Todo() {
     let formData = e.target.elements;
 
     if (formData.todo.value) {
-      setItems([
-        ...items,
-        { id: items.length + 1, todo: formData.todo.value, status: "pending" },
-      ]);
+      if (editingItemId) {
+        setItems(
+          items.map((currentItem) => {
+            if (currentItem.id === editingItemId) {
+              return {
+                ...currentItem,
+                todo: formData.todo.value,
+              };
+            } else {
+              return currentItem;
+            }
+          })
+        );
+      } else {
+        setItems([
+          ...items,
+          {
+            id: items.length + 1,
+            todo: formData.todo.value,
+            status: "pending",
+          },
+        ]);
+      }
+
     }
   };
 
@@ -72,6 +93,7 @@ export default function Todo() {
                   items={items}
                   setItems={setItems}
                   setTodoInput={setTodoInput}
+                  setEditingItemId={setEditingItemId}
                 />
               </div>
             </div>
