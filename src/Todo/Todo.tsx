@@ -1,8 +1,14 @@
-import { useState } from "react";
-import ItemList from "./ItemList";
+import React, { useState } from "react";
+import ItemList from "./ItemList.tsx";
 
-export default function Todo() {
-  const initialItems = [
+const Todo = ({ }): React.JSX.Element => {
+  interface TodoItem {
+    id: number;
+    todo: string;
+    status: "completed" | "pending";
+  }
+
+  const initialItems: TodoItem[] = [
     {
       id: 1,
       todo: "Dish washing",
@@ -15,9 +21,9 @@ export default function Todo() {
     },
   ];
 
-  const [items, setItems] = useState(initialItems);
-  const [todoInput, setTodoInput] = useState("");
-  const [editingItemId, setEditingItemId] = useState("");
+  const [items, setItems] = useState<TodoItem[]>(initialItems);
+  const [todoInput, setTodoInput] = useState<string>("");
+  const [editingItemId, setEditingItemId] = useState<number | null>(null);
 
   const handleAddItem = (e) => {
     e.preventDefault();
@@ -73,7 +79,7 @@ export default function Todo() {
                       id="form3"
                       className="form-control form-control-lg"
                       name="todo"
-                      required="required"
+                      required={true}
                       defaultValue={todoInput}
                     />
                     <label className="form-label" htmlFor="form3">
@@ -102,4 +108,6 @@ export default function Todo() {
       </div>
     </section>
   );
-}
+};
+
+export default Todo;
